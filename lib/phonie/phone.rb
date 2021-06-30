@@ -46,12 +46,16 @@ module Phonie
       extension = extract_extension(string)
       normalized = normalize(string)
 
-      return unless country = Country.detect(normalized, options[:country_code], options[:area_code])
-      parts = country.parse(normalized, options[:area_code])
-      parts[:country] = country
-      parts[:country_code] = country.country_code
-      parts[:extension] = extension
-      new(parts)
+      if country = Country.detect(normalized, options[:country_code], options[:area_code])
+        parts = country.parse(normalized, options[:area_code])
+        parts[:country] = country
+        parts[:country_code] = country.country_code
+        parts[:extension] = extension
+        new(parts)
+      else
+        default_phone = string.match(/(\d{1})(\d{3})(\d+)$/).to_a[1..-1].reverse
+        new(*default_phone)
+      end
     end
 
     # is this string a valid phone number?
