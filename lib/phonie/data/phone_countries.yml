@@ -722,6 +722,10 @@
   :iso_3166_code: MD
   :name: Moldova, Republic of
   :international_dialing_prefix: '00'
+  :number_format: '\d{8}'
+  :area_code: '22|32|[67]\d|[25]\d{2}'
+  :local_number_format: '\d{5,6}'
+  :mobile_format: '[67]\d{6}'
 -
   :country_code: '33'
   :national_dialing_prefix: '0'
